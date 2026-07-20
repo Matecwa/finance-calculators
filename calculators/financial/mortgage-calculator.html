@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mortgage Calculator — Estimate Your Monthly Payment | CalcFast</title>
+  <meta name="description" content="Free mortgage calculator. Estimate your monthly payment, total interest, and see how much house you can afford. Fast and accurate.">
+  <link rel="canonical" href="https://calcfast.com/calculators/financial/mortgage-calculator.html">
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+
+  <nav>
+    <a href="../../" class="logo">Calc<span>Fast</span></a>
+    <div class="nav-links">
+      <a href="../../#financial">Financial</a>
+      <a href="../../#math">Math</a>
+      <a href="../../#daily">Daily Life</a>
+    </div>
+  </nav>
+
+  <div class="calc-page">
+
+    <div class="breadcrumb">
+      <a href="../../">Home</a> › <a href="../../#financial">Financial</a> › Mortgage Calculator
+    </div>
+
+    <h1>Mortgage Calculator</h1>
+    <p class="subtitle">Estimate your monthly home loan payment, total interest paid, and total cost of the loan.</p>
+
+    <!-- Ad slot 1 -->
+    <div class="ad-slot">Ad Space — will be replaced with AdSense</div>
+
+    <!-- CALCULATOR -->
+    <div class="calc-box">
+      <div class="calc-inputs">
+        <div class="input-group">
+          <label for="price">Home Price ($)</label>
+          <input type="number" id="price" value="300000">
+        </div>
+        <div class="input-group">
+          <label for="down">Down Payment ($)</label>
+          <input type="number" id="down" value="60000">
+        </div>
+        <div class="input-group">
+          <label for="rate">Interest Rate (%)</label>
+          <input type="number" id="rate" value="6.5" step="0.1">
+        </div>
+        <div class="input-group">
+          <label for="term">Loan Term</label>
+          <select id="term">
+            <option value="15">15 years</option>
+            <option value="20">20 years</option>
+            <option value="30" selected>30 years</option>
+          </select>
+        </div>
+      </div>
+      <div class="results">
+        <div class="result-item">
+          <span>Monthly Payment</span>
+          <strong id="monthly">—</strong>
+        </div>
+        <div class="result-item">
+          <span>Total Interest</span>
+          <strong id="interest">—</strong>
+        </div>
+        <div class="result-item">
+          <span>Total Cost</span>
+          <strong id="total">—</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ad slot 2 -->
+    <div class="ad-slot">Ad Space</div>
+
+    <!-- SEO CONTENT -->
+    <div class="seo-content">
+      <h2>How to Use This Mortgage Calculator</h2>
+      <p>Enter the home price, your down payment amount, the annual interest rate offered by your lender, and choose your preferred loan term. The calculator instantly shows your estimated monthly payment, the total interest you'll pay over the life of the loan, and the total cost including principal and interest.</p>
+
+      <h3>Understanding Your Results</h3>
+      <p>Your monthly payment includes only principal and interest (P&I). In practice, your actual payment may also include property taxes, homeowner's insurance, and private mortgage insurance (PMI) if your down payment is less than 20%. These additional costs can add $200 to $800 or more per month depending on your location and home value.</p>
+
+      <h3>How the Calculation Works</h3>
+      <p>This calculator uses the standard amortization formula: M = P[r(1+r)^n] / [(1+r)^n – 1], where M is the monthly payment, P is the loan principal (home price minus down payment), r is the monthly interest rate (annual rate divided by 12), and n is the total number of monthly payments (years × 12).</p>
+
+      <h3>Tips for Getting a Better Mortgage Rate</h3>
+      <p>A higher credit score (740+) typically qualifies you for the lowest rates. Making a larger down payment (20% or more) eliminates PMI and may secure better terms. Shopping multiple lenders and getting pre-approved can save thousands over the life of your loan. Consider shorter loan terms like 15 years — while the monthly payment is higher, you'll pay significantly less in total interest.</p>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details>
+          <summary>How much house can I afford?</summary>
+          <p>A common guideline is that your monthly housing costs (mortgage, taxes, insurance) should not exceed 28% of your gross monthly income. For example, if you earn $6,000/month, aim to keep total housing costs under $1,680.</p>
+        </details>
+        <details>
+          <summary>Is a 15-year or 30-year mortgage better?</summary>
+          <p>A 15-year mortgage has higher monthly payments but saves you tens of thousands in interest. A 30-year mortgage offers lower monthly payments and more flexibility. The best choice depends on your monthly budget and financial goals.</p>
+        </details>
+        <details>
+          <summary>What is a good mortgage interest rate?</summary>
+          <p>Mortgage rates fluctuate with the economy. Generally, rates between 5.5% and 7% have been common in recent years. The rate you qualify for depends on your credit score, down payment, loan type, and market conditions at the time of application.</p>
+        </details>
+        <details>
+          <summary>Should I make extra payments on my mortgage?</summary>
+          <p>Making extra payments directly reduces your principal, which can save you thousands in interest and shorten your loan term. Even one extra payment per year on a 30-year mortgage can cut several years off the loan.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- Ad slot 3 -->
+    <div class="ad-slot">Ad Space</div>
+
+    <!-- RELATED -->
+    <div class="related">
+      <h2>Related Calculators</h2>
+      <div class="grid">
+        <a href="#" class="card">
+          <h3>📈 Compound Interest</h3>
+          <p>See how investments grow over time.</p>
+        </a>
+        <a href="#" class="card">
+          <h3>🏦 Loan Payoff</h3>
+          <p>Plan extra payments to pay off debt faster.</p>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>CalcFast © 2026 — <a href="../../about.html">About</a> · <a href="../../privacy.html">Privacy Policy</a> · <a href="../../contact.html">Contact</a></p>
+  </footer>
+
+  <script src="../../js/common.js"></script>
+  <script>
+    function calcMortgage() {
+      const price = val('price');
+      const down = val('down');
+      const rate = val('rate');
+      const years = val('term');
+      const principal = price - down;
+
+      if (principal <= 0 || rate <= 0) {
+        out('monthly', '$0.00');
+        out('interest', '$0.00');
+        out('total', '$0.00');
+        return;
+      }
+
+      const r = rate / 100 / 12;
+      const n = years * 12;
+      const monthly = principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      const totalPaid = monthly * n;
+
+      out('monthly', fmt(monthly));
+      out('interest', fmt(totalPaid - principal));
+      out('total', fmt(totalPaid));
+    }
+
+    listen(['price', 'down', 'rate', 'term'], calcMortgage);
+  </script>
+
+  <!-- Cloudflare Web Analytics -->
+  <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "786a42c007de480bbeeb7cb9413382cb"}'></script>
+</body>
+</html>

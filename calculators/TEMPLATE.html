@@ -1,0 +1,191 @@
+<!--
+  ═══════════════════════════════════════════════════════
+  TEMPLATE PARA NUEVA CALCULADORA
+  ═══════════════════════════════════════════════════════
+
+  INSTRUCCIONES:
+  1. Copia este archivo a la carpeta correcta:
+     - calculators/financial/  → para financieras
+     - calculators/math/       → para matemáticas
+     - calculators/daily/      → para vida diaria
+
+  2. Renómbralo con el nombre de la calculadora:
+     Ej: compound-interest-calculator.html
+
+  3. Reemplaza TODO lo que diga [PLACEHOLDER] con tu contenido
+
+  4. Escribe la lógica de cálculo en el <script> del final
+
+  5. Agrega la card en index.html apuntando a este archivo
+     y cambia el tag de "Coming soon" a "Live"
+
+  6. Sube a GitHub:
+     git add .
+     git commit -m "add [nombre] calculator"
+     git push
+  ═══════════════════════════════════════════════════════
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[NOMBRE] Calculator — [DESCRIPCIÓN CORTA] | CalcFast</title>
+  <meta name="description" content="Free [NOMBRE] calculator. [DESCRIPCIÓN DE 150-160 CARACTERES PARA GOOGLE].">
+  <link rel="canonical" href="https://calcfast.com/calculators/[CATEGORIA]/[NOMBRE]-calculator.html">
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+
+  <nav>
+    <a href="../../" class="logo">Calc<span>Fast</span></a>
+    <div class="nav-links">
+      <a href="../../#financial">Financial</a>
+      <a href="../../#math">Math</a>
+      <a href="../../#daily">Daily Life</a>
+    </div>
+  </nav>
+
+  <div class="calc-page">
+
+    <div class="breadcrumb">
+      <a href="../../">Home</a> › <a href="../../#[CATEGORIA]">[CATEGORIA]</a> › [NOMBRE] Calculator
+    </div>
+
+    <h1>[NOMBRE] Calculator</h1>
+    <p class="subtitle">[Una línea describiendo qué hace esta calculadora].</p>
+
+    <div class="ad-slot">Ad Space</div>
+
+    <!-- ═══ TU CALCULADORA ═══ -->
+    <div class="calc-box">
+      <div class="calc-inputs">
+        <!--
+          AGREGA TUS INPUTS ACÁ.
+          Cada input necesita un id único para leerlo con val('id')
+          Ejemplo:
+        -->
+        <div class="input-group">
+          <label for="input1">[Label del Input 1]</label>
+          <input type="number" id="input1" value="100">
+        </div>
+        <div class="input-group">
+          <label for="input2">[Label del Input 2]</label>
+          <input type="number" id="input2" value="50">
+        </div>
+        <!--
+          Para un dropdown/select:
+          <div class="input-group">
+            <label for="input3">[Label]</label>
+            <select id="input3">
+              <option value="a">Opción A</option>
+              <option value="b">Opción B</option>
+            </select>
+          </div>
+        -->
+      </div>
+
+      <div class="results">
+        <!--
+          AGREGA TUS RESULTADOS ACÁ.
+          Cada resultado necesita un id para escribirlo con out('id', valor)
+        -->
+        <div class="result-item">
+          <span>[Label Resultado 1]</span>
+          <strong id="result1">—</strong>
+        </div>
+        <div class="result-item">
+          <span>[Label Resultado 2]</span>
+          <strong id="result2">—</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad-slot">Ad Space</div>
+
+    <!-- ═══ CONTENIDO SEO (300-500 palabras mínimo) ═══ -->
+    <div class="seo-content">
+      <h2>How to Use This [NOMBRE] Calculator</h2>
+      <p>[Explica qué hace la calculadora y cómo interpretar los resultados. 100-150 palabras.]</p>
+
+      <h3>[Subtema Relevante]</h3>
+      <p>[Más información útil. 100-150 palabras.]</p>
+
+      <h3>[Otro Subtema]</h3>
+      <p>[Más información. 100-150 palabras.]</p>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details>
+          <summary>[Pregunta frecuente 1]?</summary>
+          <p>[Respuesta clara y útil].</p>
+        </details>
+        <details>
+          <summary>[Pregunta frecuente 2]?</summary>
+          <p>[Respuesta clara y útil].</p>
+        </details>
+        <details>
+          <summary>[Pregunta frecuente 3]?</summary>
+          <p>[Respuesta clara y útil].</p>
+        </details>
+      </div>
+    </div>
+
+    <div class="ad-slot">Ad Space</div>
+
+    <div class="related">
+      <h2>Related Calculators</h2>
+      <div class="grid">
+        <a href="[LINK]" class="card">
+          <h3>[Emoji] [Nombre Relacionada 1]</h3>
+          <p>[Descripción corta].</p>
+        </a>
+        <a href="[LINK]" class="card">
+          <h3>[Emoji] [Nombre Relacionada 2]</h3>
+          <p>[Descripción corta].</p>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>CalcFast © 2026 — <a href="../../about.html">About</a> · <a href="../../privacy.html">Privacy Policy</a> · <a href="../../contact.html">Contact</a></p>
+  </footer>
+
+  <script src="../../js/common.js"></script>
+  <script>
+    /*
+     ═══════════════════════════════════════
+     TU LÓGICA DE CÁLCULO VA ACÁ
+
+     Funciones disponibles de common.js:
+     - val('id')        → obtener valor numérico de un input
+     - out('id', texto) → escribir resultado en pantalla
+     - fmt(numero)      → formatear como dinero: $1,234.56
+     - fmtNum(n, dec)   → formatear con comas: 1,234
+     - fmtPct(0.15)     → formatear como porcentaje: 15.00%
+     - listen([ids], fn) → conectar inputs a función
+
+     Ejemplo:
+     ═══════════════════════════════════════
+    */
+    function calculate() {
+      const a = val('input1');
+      const b = val('input2');
+
+      // Tu fórmula acá
+      const result = a + b;
+
+      out('result1', fmtNum(result, 2));
+      out('result2', '...');
+    }
+
+    // Conectar: lista de ids de inputs, y la función
+    listen(['input1', 'input2'], calculate);
+  </script>
+
+  <!-- Cloudflare Web Analytics -->
+  <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "786a42c007de480bbeeb7cb9413382cb"}'></script>
+</body>
+</html>

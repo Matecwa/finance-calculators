@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator — Calculate Your Body Mass Index | CalcFast</title>
+  <meta name="description" content="Free BMI calculator. Calculate your Body Mass Index using height and weight. See your BMI category and understand what it means for your health.">
+  <link rel="canonical" href="https://calcfast.com/calculators/daily/bmi-calculator.html">
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+
+  <nav>
+    <a href="../../" class="logo">Calc<span>Fast</span></a>
+    <div class="nav-links">
+      <a href="../../#financial">Financial</a>
+      <a href="../../#math">Math</a>
+      <a href="../../#daily">Daily Life</a>
+    </div>
+  </nav>
+
+  <div class="calc-page">
+
+    <div class="breadcrumb">
+      <a href="../../">Home</a> › <a href="../../#daily">Daily Life</a> › BMI Calculator
+    </div>
+
+    <h1>BMI Calculator</h1>
+    <p class="subtitle">Calculate your Body Mass Index and find out your weight category.</p>
+
+    <div class="ad-slot">Ad Space</div>
+
+    <div class="calc-box">
+      <div class="calc-inputs">
+        <div class="input-group">
+          <label for="unit">Unit System</label>
+          <select id="unit">
+            <option value="imperial">Imperial (lbs, ft/in)</option>
+            <option value="metric">Metric (kg, cm)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Imperial inputs -->
+      <div class="calc-inputs" id="imperial-inputs">
+        <div class="input-group">
+          <label for="weight-lb">Weight (lbs)</label>
+          <input type="number" id="weight-lb" value="160">
+        </div>
+        <div class="input-group">
+          <label for="height-ft">Height (feet)</label>
+          <input type="number" id="height-ft" value="5">
+        </div>
+        <div class="input-group">
+          <label for="height-in">Height (inches)</label>
+          <input type="number" id="height-in" value="9">
+        </div>
+      </div>
+
+      <!-- Metric inputs (hidden by default) -->
+      <div class="calc-inputs" id="metric-inputs" style="display:none;">
+        <div class="input-group">
+          <label for="weight-kg">Weight (kg)</label>
+          <input type="number" id="weight-kg" value="72">
+        </div>
+        <div class="input-group">
+          <label for="height-cm">Height (cm)</label>
+          <input type="number" id="height-cm" value="175">
+        </div>
+      </div>
+
+      <div class="results">
+        <div class="result-item">
+          <span>Your BMI</span>
+          <strong id="bmi">—</strong>
+        </div>
+        <div class="result-item">
+          <span>Category</span>
+          <strong id="category" style="font-size:1.1rem;">—</strong>
+        </div>
+        <div class="result-item">
+          <span>Healthy Weight Range</span>
+          <strong id="healthy" style="font-size:1rem;">—</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- BMI scale visual -->
+    <div class="calc-box" style="padding:1.25rem;">
+      <div style="display:flex; border-radius:8px; overflow:hidden; height:32px; font-size:0.7rem; font-weight:600; color:white; text-align:center; line-height:32px;">
+        <div style="flex:18.5; background:#3b82f6;">Underweight<br>&lt;18.5</div>
+        <div style="flex:6.5; background:#22c55e;">Normal<br>18.5–24.9</div>
+        <div style="flex:5; background:#f59e0b;">Overweight<br>25–29.9</div>
+        <div style="flex:10; background:#ef4444;">Obese<br>30+</div>
+      </div>
+    </div>
+
+    <div class="ad-slot">Ad Space</div>
+
+    <div class="seo-content">
+      <h2>What is BMI?</h2>
+      <p>Body Mass Index (BMI) is a simple screening tool that estimates body fat based on your height and weight. It was developed by Belgian mathematician Adolphe Quetelet in the 1830s and is widely used by healthcare professionals as a quick assessment of weight status. BMI applies to adult men and women and is calculated differently for children.</p>
+
+      <h3>How BMI is Calculated</h3>
+      <p>The BMI formula divides your weight by the square of your height. In metric units: BMI = weight (kg) / height (m)². In imperial units: BMI = (weight (lbs) × 703) / height (inches)². For example, a person who weighs 160 lbs and is 5'9" tall has a BMI of 23.6, which falls in the normal weight category.</p>
+
+      <h3>BMI Categories</h3>
+      <p>The World Health Organization defines four main categories: Underweight (BMI below 18.5), Normal weight (BMI 18.5 to 24.9), Overweight (BMI 25 to 29.9), and Obese (BMI 30 and above). These ranges are based on population studies linking BMI to health outcomes.</p>
+
+      <h3>Limitations of BMI</h3>
+      <p>BMI does not directly measure body fat and has important limitations. It may overestimate body fat in athletes and muscular individuals, and underestimate it in older adults who have lost muscle mass. BMI also does not account for fat distribution — abdominal fat carries greater health risks than fat stored in other areas. For a complete health picture, consult with a healthcare professional who can consider additional factors.</p>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details>
+          <summary>Is BMI accurate for athletes?</summary>
+          <p>BMI can be misleading for athletes and very muscular people. Muscle weighs more than fat, so a fit athlete might have a "overweight" BMI despite having low body fat. Waist circumference or body fat percentage measurements may be more useful in these cases.</p>
+        </details>
+        <details>
+          <summary>What is a healthy BMI?</summary>
+          <p>A BMI between 18.5 and 24.9 is generally considered healthy for adults. However, "healthy" depends on many factors beyond BMI, including muscle mass, bone density, age, sex, and overall fitness level.</p>
+        </details>
+        <details>
+          <summary>Does BMI differ by age?</summary>
+          <p>For adults 20 and older, BMI categories are the same regardless of age. For children and teens (ages 2-19), BMI is interpreted using age- and sex-specific percentile charts because body composition changes as children grow.</p>
+        </details>
+      </div>
+    </div>
+
+    <div class="ad-slot">Ad Space</div>
+
+    <div class="related">
+      <h2>Related Calculators</h2>
+      <div class="grid">
+        <a href="#" class="card">
+          <h3>🔥 Calorie Calculator</h3>
+          <p>Find your daily calorie needs.</p>
+        </a>
+        <a href="#" class="card">
+          <h3>💧 Water Intake</h3>
+          <p>Calculate how much water you need daily.</p>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>CalcFast © 2026 — <a href="../../about.html">About</a> · <a href="../../privacy.html">Privacy Policy</a> · <a href="../../contact.html">Contact</a></p>
+  </footer>
+
+  <script src="../../js/common.js"></script>
+  <script>
+    // Toggle unit system
+    document.getElementById('unit').addEventListener('change', function() {
+      const isMetric = this.value === 'metric';
+      document.getElementById('imperial-inputs').style.display = isMetric ? 'none' : 'grid';
+      document.getElementById('metric-inputs').style.display = isMetric ? 'grid' : 'none';
+      calcBMI();
+    });
+
+    function calcBMI() {
+      const isMetric = document.getElementById('unit').value === 'metric';
+      let bmi, heightM;
+
+      if (isMetric) {
+        const kg = val('weight-kg');
+        const cm = val('height-cm');
+        if (kg <= 0 || cm <= 0) return;
+        heightM = cm / 100;
+        bmi = kg / (heightM * heightM);
+      } else {
+        const lbs = val('weight-lb');
+        const ft = val('height-ft');
+        const inches = val('height-in');
+        const totalInches = ft * 12 + inches;
+        if (lbs <= 0 || totalInches <= 0) return;
+        bmi = (lbs * 703) / (totalInches * totalInches);
+        heightM = totalInches * 0.0254;
+      }
+
+      // Category
+      let category, color;
+      if (bmi < 18.5) { category = 'Underweight'; color = 'var(--accent)'; }
+      else if (bmi < 25) { category = 'Normal weight'; color = 'var(--green)'; }
+      else if (bmi < 30) { category = 'Overweight'; color = 'var(--yellow)'; }
+      else { category = 'Obese'; color = 'var(--red)'; }
+
+      // Healthy weight range
+      const lowKg = 18.5 * heightM * heightM;
+      const highKg = 24.9 * heightM * heightM;
+
+      out('bmi', bmi.toFixed(1));
+      document.getElementById('bmi').style.color = color;
+      out('category', category);
+      document.getElementById('category').style.color = color;
+
+      if (isMetric) {
+        out('healthy', lowKg.toFixed(1) + ' – ' + highKg.toFixed(1) + ' kg');
+      } else {
+        out('healthy', (lowKg * 2.205).toFixed(0) + ' – ' + (highKg * 2.205).toFixed(0) + ' lbs');
+      }
+    }
+
+    listen(['weight-lb', 'height-ft', 'height-in', 'weight-kg', 'height-cm'], calcBMI);
+  </script>
+
+  <!-- Cloudflare Web Analytics -->
+  <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "786a42c007de480bbeeb7cb9413382cb"}'></script>
+</body>
+</html>
