@@ -511,12 +511,28 @@ footer a {
 }
 
 /* ═══════════════════════════════════════
+   MORTGAGE PROGRESS CHART
+   ═══════════════════════════════════════ */
+.mortgage-chart-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+}
+
+.mortgage-chart-wrap {
+  position: relative;
+  width: 100%;
+  height: 340px;
+}
+
+/* ═══════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════ */
 @media (max-width: 600px) {
   .nav-links { gap: 0.75rem; }
   .nav-links a { font-size: 0.8rem; }
   .calc-box { padding: 1.25rem; }
+  .mortgage-chart-wrap { height: 260px; }
   .result-item strong { font-size: 1.2rem; }
   .hero { padding: 2.5rem 1.5rem 2rem; }
   .sci-calc { padding: 1rem; }

@@ -71,6 +71,14 @@
       </div>
     </div>
 
+    <!-- MORTGAGE PROGRESS CHART -->
+    <div class="calc-box mortgage-chart-box">
+      <h3 class="mortgage-chart-title">Mortgage Progress Over Time</h3>
+      <div class="mortgage-chart-wrap">
+        <canvas id="mortgageChart" aria-label="Chart showing remaining loan balance, total amount paid, and total interest paid by loan year" role="img"></canvas>
+      </div>
+    </div>
+
     <!-- Ad slot 2 -->
     <div class="ad-slot">Ad Space</div>
 
@@ -134,7 +142,26 @@
   </footer>
 
   <script src="../../js/common.js"></script>
+  <script src="../../js/vendor/chart.umd.min.js"></script>
   <script>
+    // Same amortization formula calcMortgage always used — pulled out so the
+    // chart's schedule builder can reuse it instead of duplicating the math.
+    function calcMonthlyPayment(principal, r, n) {
+      return principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    }
+
+    // Categorical colors from the site's validated data-viz palette
+    // (blue / green / magenta slots — chosen in order, never eyeballed).
+    // Declared before listen() below, since listen() runs calcMortgage
+    // immediately on load and would hit these while still in the TDZ otherwise.
+    const CHART_COLORS = {
+      balance: '#2a78d6',
+      paid: '#008300',
+      interest: '#e87ba4'
+    };
+
+    let mortgageChart = null;
+
     function calcMortgage() {
       const price = val('price');
       const down = val('down');
@@ -146,20 +173,136 @@
         out('monthly', '$0.00');
         out('interest', '$0.00');
         out('total', '$0.00');
+        updateMortgageChart([]);
         return;
       }
 
       const r = rate / 100 / 12;
       const n = years * 12;
-      const monthly = principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      const monthly = calcMonthlyPayment(principal, r, n);
       const totalPaid = monthly * n;
 
       out('monthly', fmt(monthly));
       out('interest', fmt(totalPaid - principal));
       out('total', fmt(totalPaid));
+
+      updateMortgageChart(buildAmortizationSchedule(principal, r, n, monthly, years));
     }
 
     listen(['price', 'down', 'rate', 'term'], calcMortgage);
+
+    /* ═══════════════════════════════════════
+       MORTGAGE PROGRESS CHART
+       Builds the year-by-year schedule once per
+       calculation and feeds it straight to Chart.js.
+       ═══════════════════════════════════════ */
+    function buildAmortizationSchedule(principal, r, n, monthly, years) {
+      const schedule = [];
+      let balance = principal;
+      let totalPaid = 0;
+      let totalInterest = 0;
+
+      for (let month = 1; month <= n; month++) {
+        const interestPortion = balance * r;
+        const principalPortion = monthly - interestPortion;
+        balance = Math.max(0, balance - principalPortion);
+        totalPaid += monthly;
+        totalInterest += interestPortion;
+
+        if (month % 12 === 0) {
+          schedule.push({
+            year: month / 12,
+            balance: balance,
+            totalPaid: totalPaid,
+            totalInterest: totalInterest
+          });
+        }
+      }
+
+      return schedule;
+    }
+
+    function updateMortgageChart(schedule) {
+      const ctx = document.getElementById('mortgageChart');
+      const data = {
+        labels: schedule.map(p => 'Year ' + p.year),
+        datasets: [
+          {
+            label: 'Remaining Balance',
+            data: schedule.map(p => p.balance),
+            borderColor: CHART_COLORS.balance,
+            backgroundColor: CHART_COLORS.balance,
+            tension: 0.3,
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            borderWidth: 2
+          },
+          {
+            label: 'Total Amount Paid',
+            data: schedule.map(p => p.totalPaid),
+            borderColor: CHART_COLORS.paid,
+            backgroundColor: CHART_COLORS.paid,
+            tension: 0.3,
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            borderWidth: 2
+          },
+          {
+            label: 'Total Interest Paid',
+            data: schedule.map(p => p.totalInterest),
+            borderColor: CHART_COLORS.interest,
+            backgroundColor: CHART_COLORS.interest,
+            tension: 0.3,
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            borderWidth: 2
+          }
+        ]
+      };
+
+      const options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 500, easing: 'easeOutQuart' },
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { boxWidth: 12, usePointStyle: true, color: '#52514e', font: { size: 12 } }
+          },
+          tooltip: {
+            callbacks: {
+              title: (items) => items.length ? 'Loan ' + items[0].label : '',
+              label: (item) => item.dataset.label + ': ' + fmt(item.raw)
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: { display: true, text: 'Loan Year', color: '#52514e' },
+            ticks: { autoSkip: true, maxRotation: 0, color: '#898781', font: { size: 11 } },
+            grid: { color: '#e1e0d9' }
+          },
+          y: {
+            title: { display: true, text: 'Amount', color: '#52514e' },
+            ticks: {
+              color: '#898781',
+              font: { size: 11 },
+              callback: (value) => '$' + fmtNum(value, 0)
+            },
+            grid: { color: '#e1e0d9' }
+          }
+        }
+      };
+
+      if (mortgageChart) {
+        mortgageChart.data = data;
+        mortgageChart.options = options;
+        mortgageChart.update();
+      } else {
+        mortgageChart = new Chart(ctx, { type: 'line', data, options });
+      }
+    }
   </script>
 
   <!-- Cloudflare Web Analytics -->
