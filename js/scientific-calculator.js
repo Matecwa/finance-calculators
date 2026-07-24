@@ -20,6 +20,10 @@
   const FUNC_TOKENS = ['sin(', 'cos(', 'tan(', 'log(', 'ln(', 'exp(', '√('];
 
   let expr = '';
+  // Tracks whether "=" was just pressed with nothing typed since, so Save
+  // can recover the full expression (equals collapses expr to just the result).
+  let lastFullExpr = null;
+  let justEvaluated = false;
 
   function toRadians(deg) {
     return (deg * Math.PI) / 180;
@@ -233,23 +237,151 @@
 
     if (action === 'clear') {
       expr = '';
+      justEvaluated = false;
     } else if (action === 'backspace') {
       expr = removeLastToken(expr);
+      justEvaluated = false;
     } else if (action === 'equals') {
       const result = tryEvaluate(expr);
       if (result === null) {
         exprEl.textContent = 'Error';
         previewEl.innerHTML = '&nbsp;';
         expr = '';
+        justEvaluated = false;
         return;
       }
+      // Keep the pre-collapse expression around so "Save" can still show
+      // "25×8 = 200" in history after expr itself becomes just "200".
+      lastFullExpr = expr;
       expr = formatResult(result);
+      justEvaluated = true;
     } else if (value) {
       expr += value;
+      justEvaluated = false;
     }
 
     render();
   });
 
+  // ── History & Memory panel ──────────────────────────
+  // Reuses expr / render() / tryEvaluate() / formatResult() from above —
+  // no calculation logic is duplicated here.
+  const HISTORY_KEY = 'sciCalcHistory';
+  const HISTORY_LIMIT = 50;
+
+  const historyListEl = document.getElementById('sciHistoryList');
+  const historyEmptyEl = document.getElementById('sciHistoryEmpty');
+  const saveBtn = document.getElementById('sciSaveBtn');
+  const clearBtn = document.getElementById('sciHistoryClear');
+
+  let history = loadHistory();
+
+  function loadHistory() {
+    try {
+      const raw = localStorage.getItem(HISTORY_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveHistoryToStorage() {
+    try {
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+    } catch (e) {
+      // Private browsing / quota exceeded — history just won't persist.
+    }
+  }
+
+  function renderHistory() {
+    if (!historyListEl) return;
+    historyListEl.innerHTML = '';
+
+    const isEmpty = history.length === 0;
+    if (historyEmptyEl) historyEmptyEl.hidden = !isEmpty;
+    if (isEmpty) return;
+
+    history.forEach(function (item) {
+      const li = document.createElement('li');
+      li.className = 'sci-history-item';
+      li.dataset.result = item.result;
+      li.tabIndex = 0;
+      li.setAttribute('role', 'button');
+      li.setAttribute('aria-label', 'Recall result ' + item.result);
+      li.textContent = item.expr + ' = ' + item.result;
+      historyListEl.appendChild(li);
+    });
+  }
+
+  function addToHistory(exprText, resultText) {
+    const mostRecent = history[0];
+    if (mostRecent && mostRecent.expr === exprText && mostRecent.result === resultText) return;
+
+    history.unshift({ expr: exprText, result: resultText });
+    if (history.length > HISTORY_LIMIT) history = history.slice(0, HISTORY_LIMIT);
+
+    saveHistoryToStorage();
+    renderHistory();
+  }
+
+  function recallHistoryItem(item) {
+    if (!item) return;
+    expr = item.dataset.result;
+    justEvaluated = false;
+    lastFullExpr = null;
+    render();
+  }
+
+  if (saveBtn) {
+    saveBtn.addEventListener('click', function () {
+      let exprToSave, resultToSave;
+
+      if (justEvaluated && lastFullExpr !== null) {
+        // "=" was just pressed — expr is now only the result, so pull the
+        // full expression from before it collapsed.
+        exprToSave = lastFullExpr;
+        resultToSave = expr;
+      } else {
+        if (!expr.trim()) return;
+        const result = tryEvaluate(expr);
+        if (result === null) return;
+        exprToSave = expr;
+        resultToSave = formatResult(result);
+      }
+
+      addToHistory(exprToSave, resultToSave);
+    });
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', function () {
+      if (history.length === 0) return;
+      if (!confirm('Clear all calculator history? This cannot be undone.')) return;
+
+      if (historyListEl) historyListEl.classList.add('sci-history-list--clearing');
+      setTimeout(function () {
+        history = [];
+        saveHistoryToStorage();
+        renderHistory();
+        if (historyListEl) historyListEl.classList.remove('sci-history-list--clearing');
+      }, 180);
+    });
+  }
+
+  if (historyListEl) {
+    historyListEl.addEventListener('click', function (e) {
+      recallHistoryItem(e.target.closest('.sci-history-item'));
+    });
+    historyListEl.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const item = e.target.closest('.sci-history-item');
+      if (!item) return;
+      e.preventDefault();
+      recallHistoryItem(item);
+    });
+  }
+
+  renderHistory();
   render();
 })();

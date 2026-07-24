@@ -409,7 +409,16 @@ footer a {
 /* ═══════════════════════════════════════
    SCIENTIFIC CALCULATOR (HOME)
    ═══════════════════════════════════════ */
+.sci-calc-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: center;
+}
+
 .sci-calc {
+  width: 100%;
   max-width: 480px;
   margin: 0 auto;
   background: var(--surface);
@@ -417,6 +426,125 @@ footer a {
   border-radius: var(--radius);
   padding: 1.1rem 1.25rem;
   box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.sci-calc-save-btn {
+  width: 100%;
+  margin-top: 0.6rem;
+  padding: 0.65rem;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+
+.sci-calc-save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.sci-calc-save-btn:active {
+  transform: scale(0.97);
+}
+
+/* ═══════════════════════════════════════
+   HISTORY & MEMORY PANEL
+   ═══════════════════════════════════════ */
+.sci-history {
+  width: 300px;
+  max-width: 100%;
+  flex-shrink: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.sci-history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.sci-history-header h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+}
+
+.sci-history-clear {
+  border: none;
+  background: var(--red-light);
+  color: var(--red);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: filter 0.12s ease;
+}
+
+.sci-history-clear:hover {
+  filter: brightness(0.95);
+}
+
+.sci-history-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-height: 420px;
+  overflow-y: auto;
+  transition: opacity 0.18s ease;
+}
+
+.sci-history-list--clearing {
+  opacity: 0;
+}
+
+.sci-history-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
+  font-size: 0.85rem;
+  color: var(--text);
+  cursor: pointer;
+  word-break: break-word;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+  animation: sci-history-in 0.22s ease both;
+}
+
+.sci-history-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border-color: var(--accent);
+}
+
+.sci-history-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.sci-history-empty {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+@keyframes sci-history-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .sci-calc-display {
@@ -539,4 +667,6 @@ footer a {
   .sci-calc-grid { gap: 0.35rem; }
   .sci-btn { font-size: 0.9rem; }
   .sci-btn--func { font-size: 0.68rem; }
+  .sci-history { width: 100%; }
+  .sci-history-list { max-height: 320px; }
 }
