@@ -1,4 +1,4 @@
-# CalcFast — Sitio de Calculadoras
+# NumCalcX — Sitio de Calculadoras
 
 ## Estructura del proyecto
 

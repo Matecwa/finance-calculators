@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://calcfast.com/sitemap.xml
+Sitemap: https://numcalcx.com/sitemap.xml
