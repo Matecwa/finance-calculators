@@ -327,7 +327,7 @@
 
   function recallHistoryItem(item) {
     if (!item) return;
-    expr = item.dataset.result;
+    expr += item.dataset.result;
     justEvaluated = false;
     lastFullExpr = null;
     render();
