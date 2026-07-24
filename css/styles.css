@@ -407,6 +407,110 @@ footer a {
 }
 
 /* ═══════════════════════════════════════
+   SCIENTIFIC CALCULATOR (HOME)
+   ═══════════════════════════════════════ */
+.sci-calc {
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.sci-calc-display {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.7rem 1.1rem;
+  margin-bottom: 0.65rem;
+  text-align: right;
+  overflow: hidden;
+}
+
+.sci-calc-expr {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.2rem, 5vw, 1.6rem);
+  font-weight: 700;
+  color: var(--text);
+  min-height: 1.6rem;
+  overflow-wrap: break-word;
+}
+
+.sci-calc-preview {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  min-height: 1rem;
+  margin-top: 0.2rem;
+}
+
+.sci-calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.4rem;
+}
+
+.sci-btn {
+  border: none;
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  aspect-ratio: 2.4 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+
+.sci-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.sci-btn:active {
+  transform: scale(0.94);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.sci-btn--func {
+  background: var(--purple-light);
+  color: var(--purple);
+  font-size: 0.8rem;
+}
+
+.sci-btn--op {
+  background: var(--accent-light);
+  color: var(--accent);
+  font-size: 1.1rem;
+}
+
+.sci-btn--clear {
+  background: var(--red-light);
+  color: var(--red);
+}
+
+.sci-btn--del {
+  background: var(--yellow-light);
+  color: var(--yellow);
+}
+
+.sci-btn--equals {
+  background: var(--accent);
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.sci-btn--equals:hover {
+  filter: brightness(1.08);
+}
+
+/* ═══════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════ */
 @media (max-width: 600px) {
@@ -415,4 +519,8 @@ footer a {
   .calc-box { padding: 1.25rem; }
   .result-item strong { font-size: 1.2rem; }
   .hero { padding: 2.5rem 1.5rem 2rem; }
+  .sci-calc { padding: 1rem; }
+  .sci-calc-grid { gap: 0.35rem; }
+  .sci-btn { font-size: 0.9rem; }
+  .sci-btn--func { font-size: 0.68rem; }
 }

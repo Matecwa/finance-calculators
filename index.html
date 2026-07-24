@@ -27,6 +27,63 @@
   </section>
 
   <!-- ═══════════════════════════════════
+       SCIENTIFIC CALCULATOR (HOME)
+       ═══════════════════════════════════ -->
+  <section class="section" id="calculator">
+    <h2 class="section-title">🧮 Scientific Calculator</h2>
+    <p class="section-subtitle">Try it right here — no need to open a separate page.</p>
+
+    <div class="sci-calc" id="sciCalc">
+      <div class="sci-calc-display">
+        <div class="sci-calc-expr" id="sciExpr" aria-live="polite">0</div>
+        <div class="sci-calc-preview" id="sciPreview">&nbsp;</div>
+      </div>
+
+      <div class="sci-calc-grid">
+        <button type="button" class="sci-btn sci-btn--clear" data-action="clear" aria-label="Clear">C</button>
+        <button type="button" class="sci-btn sci-btn--del" data-action="backspace" aria-label="Backspace">⌫</button>
+        <button type="button" class="sci-btn" data-value="(" aria-label="Open parenthesis">(</button>
+        <button type="button" class="sci-btn" data-value=")" aria-label="Close parenthesis">)</button>
+
+        <button type="button" class="sci-btn sci-btn--func" data-value="sin(" aria-label="Sine">sin</button>
+        <button type="button" class="sci-btn sci-btn--func" data-value="cos(" aria-label="Cosine">cos</button>
+        <button type="button" class="sci-btn sci-btn--func" data-value="tan(" aria-label="Tangent">tan</button>
+        <button type="button" class="sci-btn sci-btn--func" data-value="√(" aria-label="Square root">√</button>
+
+        <button type="button" class="sci-btn sci-btn--func" data-value="log(" aria-label="Base 10 logarithm">log</button>
+        <button type="button" class="sci-btn sci-btn--func" data-value="ln(" aria-label="Natural logarithm">ln</button>
+        <button type="button" class="sci-btn sci-btn--func" data-value="exp(" aria-label="Exponential">exp</button>
+        <button type="button" class="sci-btn sci-btn--op" data-value="^" aria-label="Power">^</button>
+
+        <button type="button" class="sci-btn sci-btn--func" data-value="π" aria-label="Pi">π</button>
+        <button type="button" class="sci-btn sci-btn--func" data-value="e" aria-label="Euler's number">e</button>
+        <button type="button" class="sci-btn sci-btn--op" data-value="!" aria-label="Factorial">!</button>
+        <button type="button" class="sci-btn sci-btn--op" data-value="%" aria-label="Percent / modulo">%</button>
+
+        <button type="button" class="sci-btn" data-value="7">7</button>
+        <button type="button" class="sci-btn" data-value="8">8</button>
+        <button type="button" class="sci-btn" data-value="9">9</button>
+        <button type="button" class="sci-btn sci-btn--op" data-value="÷" aria-label="Divide">÷</button>
+
+        <button type="button" class="sci-btn" data-value="4">4</button>
+        <button type="button" class="sci-btn" data-value="5">5</button>
+        <button type="button" class="sci-btn" data-value="6">6</button>
+        <button type="button" class="sci-btn sci-btn--op" data-value="×" aria-label="Multiply">×</button>
+
+        <button type="button" class="sci-btn" data-value="1">1</button>
+        <button type="button" class="sci-btn" data-value="2">2</button>
+        <button type="button" class="sci-btn" data-value="3">3</button>
+        <button type="button" class="sci-btn sci-btn--op" data-value="-" aria-label="Subtract">−</button>
+
+        <button type="button" class="sci-btn" data-value="0">0</button>
+        <button type="button" class="sci-btn" data-value="." aria-label="Decimal point">.</button>
+        <button type="button" class="sci-btn sci-btn--equals" data-action="equals" aria-label="Equals">=</button>
+        <button type="button" class="sci-btn sci-btn--op" data-value="+" aria-label="Add">+</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
        FINANCIAL CALCULATORS
        ═══════════════════════════════════ -->
   <section id="financial" class="section">
@@ -133,6 +190,8 @@
   <footer>
     <p>CalcFast © 2026 — <a href="about.html">About</a> · <a href="privacy.html">Privacy Policy</a> · <a href="contact.html">Contact</a></p>
   </footer>
+
+  <script src="js/scientific-calculator.js"></script>
 
   <!-- Cloudflare Web Analytics -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "786a42c007de480bbeeb7cb9413382cb"}'></script>
